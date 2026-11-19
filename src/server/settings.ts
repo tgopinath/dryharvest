@@ -25,7 +25,7 @@ type Defaults = { store: StoreSettings; shipping: ShippingSettings; heroClaims: 
 export const DEFAULT_SETTINGS: Defaults = {
   store: {
     name: 'DryHarvest', tagline: 'Naturally Dried. Naturally Better.', email: '', phone: '', whatsapp: '', address: '',
-    legalName: '', gstin: '', state: 'Tamil Nadu', fssaiLicense: '', announcement: '', instagram: '', facebook: '', youtube: '',
+    legalName: '', gstin: '', state: 'Tamil Nadu', fssaiLicense: '', announcement: 'Demo showcase: products are not for sale, and no orders, payments or accounts are taken.', instagram: '', facebook: '', youtube: '',
   },
   shipping: {
     flatRate: 6000, freeAbove: 99900, codEnabled: false, codFee: 4900, codMaxOrder: 300000,

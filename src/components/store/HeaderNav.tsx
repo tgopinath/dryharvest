@@ -68,7 +68,7 @@ export function MobileNav({ categories, isStaff, loggedIn }: { categories: Cat[]
           <div className="absolute inset-y-0 right-0 flex w-[min(88vw,360px)] flex-col overflow-y-auto bg-brand-cream p-5">
             <div className="mb-4 flex items-center justify-between"><span className="font-display text-xl">Menu</span><button aria-label="Close menu" onClick={() => setOpen(false)} className="flex size-10 items-center justify-center rounded-full hover:bg-brand-ink/5"><X className="size-5" /></button></div>
             <nav aria-label="Mobile" className="space-y-1">
-              {[...links, { href: '/categories', label: 'All categories' }, { href: '/about', label: 'About' }, { href: '/contact', label: 'Contact' }, { href: loggedIn ? '/account' : '/login', label: loggedIn ? 'My account' : 'Log in / Register' }, ...(isStaff ? [{ href: '/admin', label: 'Admin dashboard' }] : [])].map((l) => (
+              {[...links, { href: '/categories', label: 'All categories' }, { href: '/about', label: 'About' }, { href: '/contact', label: 'Contact' }].map((l) => (
                 <Link key={l.href} href={l.href} className="block rounded-xl px-3 py-2.5 font-semibold hover:bg-white">{l.label}</Link>
               ))}
               <p className="px-3 pb-1 pt-4 text-xs font-semibold text-brand-ink/50">Categories</p>

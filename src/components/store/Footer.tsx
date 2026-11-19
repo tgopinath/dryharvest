@@ -25,7 +25,6 @@ export async function Footer() {
         <nav aria-label="Help">
           <p className="font-display text-lg text-white">Help</p>
           <ul className="mt-3 space-y-2 text-sm">
-            <li><Link className="hover:text-white" href="/account/orders">Track your order</Link></li>
             <li><Link className="hover:text-white" href="/contact">Contact us</Link></li>
             <li><Link className="hover:text-white" href="/policies/shipping">Shipping policy</Link></li>
             <li><Link className="hover:text-white" href="/policies/returns">Returns &amp; replacements</Link></li>

@@ -1,19 +1,32 @@
-import { drizzle } from 'drizzle-orm/node-postgres';
-import { Pool } from 'pg';
+// Static demo: an in-memory Postgres (PGlite) that lives inside the app process.
+// No external database — every cold start applies the migrations and loads the
+// demo catalogue from scripts/seed-data.ts. Nothing written here is persisted.
+import { PGlite } from '@electric-sql/pglite';
+import { drizzle } from 'drizzle-orm/pglite';
 import * as schema from './schema';
+import { initDemoDb } from './demo-seed';
 
-const globalForDb = globalThis as unknown as { pool?: Pool };
+const globalForDb = globalThis as unknown as { pglite?: { raw: PGlite; ready: Promise<void> } };
 
-const pool =
-  globalForDb.pool ??
-  new Pool({
-    connectionString: process.env.DATABASE_URL,
-    max: Number(process.env.DB_POOL_MAX ?? 10),
-    ssl: process.env.DATABASE_SSL === 'true' ? { rejectUnauthorized: false } : undefined,
-  });
-if (process.env.NODE_ENV !== 'production') globalForDb.pool = pool;
+function boot() {
+  const raw = new PGlite();
+  const ready = initDemoDb(raw);
+  return { raw, ready };
+}
+const { raw, ready } = (globalForDb.pglite ??= boot());
 
-export const db = drizzle(pool, { schema });
+// Every query waits for the seed to finish before running.
+const GATED = new Set(['query', 'exec', 'transaction']);
+const client = new Proxy(raw, {
+  get(target, prop, receiver) {
+    const value = Reflect.get(target, prop, receiver);
+    if (typeof value !== 'function') return value;
+    if (GATED.has(prop as string)) return async (...args: unknown[]) => { await ready; return value.apply(target, args); };
+    return value.bind(target);
+  },
+});
+
+export const db = drizzle({ client, schema });
 export type DB = typeof db;
 export type Tx = Parameters<Parameters<DB['transaction']>[0]>[0];
 export { schema };

@@ -1,11 +1,10 @@
 'use client';
-import { useState, useTransition } from 'react';
+import { useState } from 'react';
 import { ShoppingBag, Minus, Plus } from 'lucide-react';
-import { addToCart } from '@/app/actions/cart';
-import { useToast } from '@/components/ui/toast';
-import { Button, Spinner } from '@/components/ui';
+
+const DEMO_LABEL = 'Demo store, not for sale';
+import { Button } from '@/components/ui';
 import { cn, formatINR, discountPercent } from '@/lib/utils';
-import { useRouter } from 'next/navigation';
 
 type V = { id: string; label: string; price: number; mrp: number; stock: number };
 
@@ -13,9 +12,6 @@ type V = { id: string; label: string; price: number; mrp: number; stock: number 
 export function QuickAdd({ variants, productName }: { variants: V[]; productName: string }) {
   const first = variants.find((v) => v.stock > 0) ?? variants[0];
   const [vid, setVid] = useState(first?.id);
-  const [pending, start] = useTransition();
-  const toast = useToast();
-  const router = useRouter();
   const v = variants.find((x) => x.id === vid) ?? first;
   if (!v) return null;
   const out = v.stock <= 0;
@@ -42,18 +38,9 @@ export function QuickAdd({ variants, productName }: { variants: V[]; productName
           <span className="rounded-full bg-brand-pale px-2.5 py-1 text-xs font-semibold text-brand-deep">{v.label}</span>
         )}
       </div>
-      <Button
-        variant={out ? 'outline' : 'primary'}
-        size="sm"
-        className="w-full"
-        disabled={out || pending}
-        onClick={() => start(async () => {
-          const r = await addToCart(v.id, 1);
-          if (r.ok) { toast(`${productName} (${v.label}) added to cart`); router.refresh(); } else toast(r.error ?? 'Could not add', 'error');
-        })}
-      >
-        {pending ? <Spinner /> : <ShoppingBag className="size-4" />}
-        {out ? 'Out of stock' : 'Add to cart'}
+      <Button variant="outline" size="sm" className="w-full" disabled>
+        <ShoppingBag className="size-4" />
+        {out ? 'Out of stock' : DEMO_LABEL}
       </Button>
     </div>
   );
@@ -64,19 +51,10 @@ export function BuyBox({ variants, productName, children }: { variants: V[]; pro
   const first = variants.find((v) => v.stock > 0) ?? variants[0];
   const [vid, setVid] = useState(first?.id);
   const [qty, setQty] = useState(1);
-  const [pending, start] = useTransition();
-  const toast = useToast();
-  const router = useRouter();
   const v = variants.find((x) => x.id === vid) ?? first;
   if (!v) return <p className="text-sm text-brand-ink/60">This product is currently unavailable.</p>;
   const out = v.stock <= 0;
   const max = Math.min(20, v.stock);
-  const add = (buyNow: boolean) => start(async () => {
-    const r = await addToCart(v.id, qty);
-    if (!r.ok) { toast(r.error ?? 'Could not add', 'error'); return; }
-    if (buyNow) router.push('/checkout');
-    else { toast(`${productName} (${v.label}) × ${qty} added to cart`); router.refresh(); }
-  });
   return (
     <div className="space-y-5">
       <div>
@@ -112,10 +90,9 @@ export function BuyBox({ variants, productName, children }: { variants: V[]; pro
           <span className="w-8 text-center font-semibold" aria-live="polite" aria-label={`Quantity ${qty}`}>{qty}</span>
           <button type="button" aria-label="Increase quantity" className="flex size-12 items-center justify-center disabled:opacity-30" disabled={qty >= max || out} onClick={() => setQty((q) => q + 1)}><Plus className="size-4" /></button>
         </div>
-        <Button size="lg" className="flex-1" disabled={out || pending} onClick={() => add(false)}>
-          {pending ? <Spinner /> : <ShoppingBag className="size-5" />} Add to cart
+        <Button size="lg" variant="outline" className="flex-1" disabled>
+          <ShoppingBag className="size-5" /> {out ? 'Out of stock' : DEMO_LABEL}
         </Button>
-        <Button size="lg" variant="yellow" disabled={out || pending} onClick={() => add(true)}>Buy now</Button>
         {children}
       </div>
     </div>

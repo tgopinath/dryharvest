@@ -1,7 +1,3 @@
-import Link from 'next/link';
-import { Heart, ShoppingBag, User } from 'lucide-react';
-import { getCurrentUser } from '@/server/auth';
-import { getCartCount } from '@/server/cart';
 import { getCategories } from '@/server/catalog';
 import { getSetting } from '@/server/settings';
 import { Logo } from './Logo';
@@ -9,7 +5,7 @@ import { SearchBox } from './SearchBox';
 import { DesktopNav, MobileNav } from './HeaderNav';
 
 export async function Header() {
-  const [user, count, cats, store] = await Promise.all([getCurrentUser(), getCartCount(), getCategories(), getSetting('store')]);
+  const [cats, store] = await Promise.all([getCategories(), getSetting('store')]);
   const categories = cats.map((c) => ({ slug: c.slug, name: c.name, tagline: c.tagline }));
   return (
     <>
@@ -20,12 +16,8 @@ export async function Header() {
           <DesktopNav categories={categories} />
           <SearchBox className="ml-auto hidden w-full max-w-xs md:block" />
           <div className="ml-auto flex items-center gap-1 md:ml-0">
-            <MobileNav categories={categories} isStaff={!!user && user.role !== 'CUSTOMER'} loggedIn={!!user} />
-            <Link href={user ? '/account' : '/login'} aria-label={user ? 'My account' : 'Log in'} className="hidden size-10 items-center justify-center rounded-full hover:bg-brand-ink/5 sm:flex"><User className="size-5" /></Link>
-            <Link href="/account/wishlist" aria-label="Wishlist" className="hidden size-10 items-center justify-center rounded-full hover:bg-brand-ink/5 sm:flex"><Heart className="size-5" /></Link>
-            <Link href="/cart" className="ml-1 flex h-10 items-center gap-2 rounded-full bg-brand px-4 text-sm font-semibold text-white hover:bg-brand-deep" aria-label={`Cart, ${count} item${count === 1 ? '' : 's'}`}>
-              <ShoppingBag className="size-4" /><span className="hidden sm:inline">Cart</span><span className="min-w-5 rounded-full bg-white/20 px-1.5 text-center text-xs">{count}</span>
-            </Link>
+            <MobileNav categories={categories} isStaff={false} loggedIn={false} />
+            <span className="rounded-full bg-brand-yellow px-3 py-1.5 text-xs font-bold text-brand-deep">Demo store</span>
           </div>
         </div>
       </header>

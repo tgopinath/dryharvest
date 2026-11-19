@@ -8,6 +8,9 @@ if (process.env.STORAGE_PUBLIC_URL) {
 }
 const nextConfig = {
   images: { remotePatterns: remote },
+  // Static demo: in-memory PGlite database seeded from drizzle/*.sql at cold start.
+  serverExternalPackages: ['@electric-sql/pglite'],
+  outputFileTracingIncludes: { '/**': ['./drizzle/**/*.sql'] },
   experimental: { serverActions: { bodySizeLimit: '8mb' } },
   poweredByHeader: false,
   async headers() {
