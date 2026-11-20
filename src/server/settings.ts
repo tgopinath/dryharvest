@@ -24,7 +24,7 @@ export type AboutContent = { heading: string; body: string };
 type Defaults = { store: StoreSettings; shipping: ShippingSettings; heroClaims: HeroClaim[]; policies: Policies; about: AboutContent };
 export const DEFAULT_SETTINGS: Defaults = {
   store: {
-    name: 'DryHarvest', tagline: 'Naturally Dried. Naturally Better.', email: '', phone: '', whatsapp: '', address: '',
+    name: 'NutriDry Naturals', tagline: 'Naturally Dried. Naturally Better.', email: '', phone: '', whatsapp: '', address: '',
     legalName: '', gstin: '', state: 'Tamil Nadu', fssaiLicense: '', announcement: 'Demo showcase: products are not for sale, and no orders, payments or accounts are taken.', instagram: '', facebook: '', youtube: '',
   },
   shipping: {
@@ -46,7 +46,7 @@ export const DEFAULT_SETTINGS: Defaults = {
   },
   about: {
     heading: 'Naturally dried, carefully packed.',
-    body: 'TODO: Tell your story — where your produce comes from, how you dry it and who is behind DryHarvest.',
+    body: 'TODO: Tell your story — where your produce comes from, how you dry it and who is behind NutriDry Naturals.',
   },
 };
 export type SettingsKey = keyof typeof DEFAULT_SETTINGS;

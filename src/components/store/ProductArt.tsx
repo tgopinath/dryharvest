@@ -104,7 +104,7 @@ export function ProductArt({ name, className, label = true, pouch = true }: { na
           <path d="M64 88 L176 88" stroke="#17271C" strokeOpacity=".15" strokeDasharray="3 3" />
           <rect x="72" y="132" width="96" height="150" rx="6" fill="#fff" />
           <g transform="translate(108 140) scale(.62)"><path d="M21 22C14 23 7 18 6 8c8-1 15 3 15 14Z" fill="#176B36" /><path d="M23 19c1-9 7-15 15-15 0 9-6 15-15 15Z" fill="#2E8B4E" /></g>
-          <text x="120" y="176" textAnchor="middle" fontFamily="Georgia, serif" fontSize="9" fill="#123D27">DryHarvest</text>
+          <text x="120" y="176" textAnchor="middle" fontFamily="Georgia, serif" fontSize="9" fill="#123D27">NutriDry</text>
           {lines.slice(0, 4).map((l, i) => (
             <text key={i} x="120" y={198 + i * 13} textAnchor="middle" fontFamily="Arial, sans-serif" fontWeight="700" fontSize={l.length > 9 ? 8.5 : 10} fill="#17271C">{l}</text>
           ))}

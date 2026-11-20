@@ -7,7 +7,7 @@ import { AdminNav, type NavItem } from '@/components/admin/AdminNav';
 import { LeafMark } from '@/components/store/Logo';
 import { logout } from '@/app/actions/auth';
 
-export const metadata: Metadata = { title: { default: 'Admin', template: '%s · DryHarvest Admin' }, robots: { index: false } };
+export const metadata: Metadata = { title: { default: 'Admin', template: '%s · NutriDry Naturals Admin' }, robots: { index: false } };
 export const dynamic = 'force-dynamic';
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -41,7 +41,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   return (
     <div className="min-h-screen bg-white lg:grid lg:grid-cols-[248px_1fr]">
       <aside className="bg-brand-deep lg:sticky lg:top-0 lg:flex lg:h-screen lg:flex-col lg:overflow-y-auto lg:p-4">
-        <Link href="/admin" className="mb-6 hidden items-center gap-2 px-2 pt-1 lg:flex"><LeafMark className="size-8" /><span className="font-display text-xl text-white">DryHarvest</span><span className="rounded bg-white/10 px-1.5 text-[10px] font-semibold text-white/70">Admin</span></Link>
+        <Link href="/admin" className="mb-6 hidden items-center gap-2 px-2 pt-1 lg:flex"><LeafMark className="size-8" /><span className="font-display text-xl text-white">NutriDry Naturals</span><span className="rounded bg-white/10 px-1.5 text-[10px] font-semibold text-white/70">Admin</span></Link>
         <AdminNav items={items} />
         <div className="mt-auto hidden border-t border-white/10 pt-4 text-xs text-white/60 lg:block">
           <p className="truncate font-semibold text-white">{user.name}</p>

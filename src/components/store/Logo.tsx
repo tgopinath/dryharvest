@@ -13,10 +13,10 @@ export function LeafMark({ className = 'size-8' }: { className?: string }) {
 
 export function Logo({ tagline = true }: { tagline?: boolean }) {
   return (
-    <Link href="/" className="flex items-center gap-2" aria-label="DryHarvest home">
+    <Link href="/" className="flex items-center gap-2" aria-label="NutriDry Naturals home">
       <LeafMark className="size-9" />
       <span className="leading-none">
-        <span className="block font-display text-[1.6rem] font-semibold text-brand-deep">DryHarvest</span>
+        <span className="block whitespace-nowrap font-display text-[1.3rem] text-brand-deep sm:text-[1.5rem]"><span className="font-bold">NutriDry</span> <span className="font-normal text-brand">Naturals</span></span>
         {tagline && <span className="mt-0.5 hidden text-[10px] font-medium text-brand-ink/60 sm:block">Naturally Dried. Naturally Better.</span>}
       </span>
     </Link>

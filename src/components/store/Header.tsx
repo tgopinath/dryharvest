@@ -17,7 +17,7 @@ export async function Header() {
           <SearchBox className="ml-auto hidden w-full max-w-xs md:block" />
           <div className="ml-auto flex items-center gap-1 md:ml-0">
             <MobileNav categories={categories} isStaff={false} loggedIn={false} />
-            <span className="rounded-full bg-brand-yellow px-3 py-1.5 text-xs font-bold text-brand-deep">Demo store</span>
+            <span className="hidden whitespace-nowrap rounded-full bg-brand-yellow px-3 py-1.5 text-xs font-bold text-brand-deep sm:inline">Demo store</span>
           </div>
         </div>
       </header>

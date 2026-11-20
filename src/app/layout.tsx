@@ -10,9 +10,9 @@ const APP_URL = process.env.APP_URL || 'http://localhost:3000';
 
 export const metadata: Metadata = {
   metadataBase: new URL(APP_URL),
-  title: { default: 'DryHarvest — Naturally Dried. Naturally Better.', template: '%s | DryHarvest' },
+  title: { default: 'NutriDry Naturals — Naturally Dried. Naturally Better.', template: '%s | NutriDry Naturals' },
   description: 'Premium dried fruits, vegetables, herbs, flowers, spices and traditional South Indian dried foods, packed fresh and delivered across India.',
-  openGraph: { type: 'website', siteName: 'DryHarvest', locale: 'en_IN' },
+  openGraph: { type: 'website', siteName: 'NutriDry Naturals', locale: 'en_IN' },
   icons: { icon: '/icon.svg' },
 };
 export const viewport: Viewport = { themeColor: '#176B36' };

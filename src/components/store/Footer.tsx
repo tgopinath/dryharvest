@@ -9,7 +9,7 @@ export async function Footer() {
     <footer className="mt-24 bg-brand-deep text-white/80">
       <div className="container-x grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div>
-          <div className="flex items-center gap-2"><LeafMark className="size-9" /><span className="font-display text-2xl text-white">DryHarvest</span></div>
+          <div className="flex items-center gap-2"><LeafMark className="size-9" /><span className="font-display text-2xl text-white">NutriDry Naturals</span></div>
           <p className="mt-3 max-w-xs text-sm">{store.tagline}</p>
           <dl className="mt-5 space-y-1 text-sm">
             {store.email && <div><dt className="sr-only">Email</dt><dd><a className="hover:text-white" href={`mailto:${store.email}`}>{store.email}</a></dd></div>}
@@ -34,7 +34,7 @@ export async function Footer() {
         <nav aria-label="Company">
           <p className="font-display text-lg text-white">Company</p>
           <ul className="mt-3 space-y-2 text-sm">
-            <li><Link className="hover:text-white" href="/about">About DryHarvest</Link></li>
+            <li><Link className="hover:text-white" href="/about">About NutriDry Naturals</Link></li>
             <li><Link className="hover:text-white" href="/policies/privacy">Privacy policy</Link></li>
             <li><Link className="hover:text-white" href="/policies/terms">Terms of service</Link></li>
             {store.instagram && <li><a className="hover:text-white" href={store.instagram} rel="noopener noreferrer" target="_blank">Instagram</a></li>}
@@ -44,7 +44,7 @@ export async function Footer() {
       </div>
       <div className="border-t border-white/10">
         <div className="container-x flex flex-col gap-2 py-5 text-xs text-white/55 sm:flex-row sm:justify-between">
-          <p>© {new Date().getFullYear()} {store.legalName || 'DryHarvest'}. All rights reserved.{store.gstin && ` GSTIN ${store.gstin}.`}</p>
+          <p>© {new Date().getFullYear()} {store.legalName || 'NutriDry Naturals'}. All rights reserved.{store.gstin && ` GSTIN ${store.gstin}.`}</p>
           <p>Prices in INR, inclusive of applicable taxes.</p>
         </div>
       </div>

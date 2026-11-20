@@ -31,7 +31,7 @@ export default async function InvoicePage({ params }: { params: Promise<{ number
       <div className="no-print mb-6 flex justify-end"><PrintButton /></div>
       <header className="flex flex-wrap justify-between gap-6 border-b border-brand-ink/15 pb-6">
         <div>
-          <p className="font-display text-2xl text-brand-deep">{store.legalName || 'DryHarvest'}</p>
+          <p className="font-display text-2xl text-brand-deep">{store.legalName || 'NutriDry Naturals'}</p>
           {store.address && <p className="whitespace-pre-line text-brand-ink/70">{store.address}</p>}
           {store.gstin && <p>GSTIN: {store.gstin}</p>}
           {store.fssaiLicense && <p>FSSAI Lic. No.: {store.fssaiLicense}</p>}

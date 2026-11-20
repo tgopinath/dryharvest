@@ -115,7 +115,7 @@ export function RetryPayment({ number }: { number: string }) {
         if (!window.Razorpay) await new Promise<void>((res, rej) => { const sc = document.createElement('script'); sc.src = 'https://checkout.razorpay.com/v1/checkout.js'; sc.onload = () => res(); sc.onerror = () => rej(); document.body.appendChild(sc); }).catch(() => setErr('Could not load the payment window.'));
         if (!window.Razorpay) return;
         new window.Razorpay({
-          key: r.keyId, amount: r.amount, currency: 'INR', name: 'DryHarvest', description: `Order ${r.number}`, order_id: r.orderId,
+          key: r.keyId, amount: r.amount, currency: 'INR', name: 'NutriDry Naturals', description: `Order ${r.number}`, order_id: r.orderId,
           prefill: { name: r.name, email: r.email, contact: r.phone }, theme: { color: '#176B36' },
           handler: async (resp: Record<string, string>) => {
             await fetch('/api/payments/razorpay/verify', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(resp) });

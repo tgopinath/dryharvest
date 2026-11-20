@@ -22,7 +22,7 @@ export default async function Messages() {
           {list.map((m) => (
             <li key={m.id} className={`rounded-2xl border bg-white p-5 ${m.isRead ? 'border-brand-ink/10' : 'border-brand/40'}`}>
               <div className="flex flex-wrap items-center justify-between gap-2">
-                <p className="text-sm"><b>{m.name}</b> · <a className="underline" href={`mailto:${m.email}?subject=${encodeURIComponent(`Re: ${m.subject ?? 'Your message to DryHarvest'}`)}`}>{m.email}</a>{m.phone && ` · ${m.phone}`}{m.subject && ` · ${m.subject}`}</p>
+                <p className="text-sm"><b>{m.name}</b> · <a className="underline" href={`mailto:${m.email}?subject=${encodeURIComponent(`Re: ${m.subject ?? 'Your message to NutriDry Naturals'}`)}`}>{m.email}</a>{m.phone && ` · ${m.phone}`}{m.subject && ` · ${m.subject}`}</p>
                 <span className="flex items-center gap-2 text-xs text-brand-ink/55">{formatDate(m.createdAt, true)} {!m.isRead && <Badge tone="yellow">new</Badge>}</span>
               </div>
               <p className="mt-2 whitespace-pre-line text-sm">{m.message}</p>

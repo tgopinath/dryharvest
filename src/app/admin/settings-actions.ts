@@ -18,7 +18,7 @@ export async function saveStore(_: R, fd: FormData): Promise<R> {
   if (fssai && !/^\d{14}$/.test(fssai)) return { ok: false, error: 'FSSAI licence numbers have 14 digits.' };
   const gstin = s(fd, 'gstin').toUpperCase();
   if (gstin && !/^[0-9]{2}[A-Z0-9]{13}$/.test(gstin)) return { ok: false, error: 'GSTIN should be 15 characters.' };
-  const v = { name: s(fd, 'name') || 'DryHarvest', tagline: s(fd, 'tagline'), email: s(fd, 'email'), phone: s(fd, 'phone'), whatsapp: s(fd, 'whatsapp'), address: s(fd, 'address'),
+  const v = { name: s(fd, 'name') || 'NutriDry Naturals', tagline: s(fd, 'tagline'), email: s(fd, 'email'), phone: s(fd, 'phone'), whatsapp: s(fd, 'whatsapp'), address: s(fd, 'address'),
     legalName: s(fd, 'legalName'), gstin, state: s(fd, 'state'), fssaiLicense: fssai, announcement: s(fd, 'announcement'), instagram: s(fd, 'instagram'), facebook: s(fd, 'facebook'), youtube: s(fd, 'youtube') };
   await saveSetting('store', v);
   await audit(user.id, 'settings.store', 'settings', 'store', v);

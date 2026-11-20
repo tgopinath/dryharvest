@@ -42,7 +42,7 @@ export function CheckoutForm({ addresses, razorpayEnabled, codEnabled, codFee, t
       const ok = await loadRazorpay();
       if (!ok || !window.Razorpay) { setPaying(false); setError('Could not load the payment window. Check your connection and try again from your orders page.'); return; }
       const rz = new window.Razorpay({
-        key: r.razorpay.keyId, amount: r.razorpay.amount, currency: 'INR', name: 'DryHarvest', description: `Order ${r.orderNumber}`,
+        key: r.razorpay.keyId, amount: r.razorpay.amount, currency: 'INR', name: 'NutriDry Naturals', description: `Order ${r.orderNumber}`,
         order_id: r.razorpay.orderId, prefill: { name: r.razorpay.name, email: r.razorpay.email, contact: r.razorpay.phone },
         theme: { color: '#176B36' },
         handler: async (resp: { razorpay_order_id: string; razorpay_payment_id: string; razorpay_signature: string }) => {

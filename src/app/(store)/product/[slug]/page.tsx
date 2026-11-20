@@ -68,7 +68,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
   const jsonLd = {
     '@context': 'https://schema.org', '@type': 'Product', name: p.name, description: p.shortDescription ?? undefined,
-    sku: firstVariant?.sku, category: p.category.name, brand: { '@type': 'Brand', name: 'DryHarvest' },
+    sku: firstVariant?.sku, category: p.category.name, brand: { '@type': 'Brand', name: 'NutriDry Naturals' },
     image: p.images.map((i) => i.url),
     offers: p.variants.map((v) => ({
       '@type': 'Offer', sku: v.sku, priceCurrency: 'INR', price: (v.price / 100).toFixed(2),

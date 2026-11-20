@@ -175,7 +175,7 @@ export const HOME_SECTIONS = [
   { key: 'tea', title: 'Flowers & Herbal Tea', eyebrow: 'Brew something calm', data: { collection: 'tea' } },
   { key: 'ready-to-cook', title: 'Ready-to-Cook', eyebrow: 'Dinner, sorted', data: { collection: 'ready-to-cook' } },
   { key: 'combo', title: 'Combo Packs & Gift Boxes', eyebrow: 'Made for gifting', data: { collection: 'combo' } },
-  { key: 'why', title: 'Why DryHarvest', eyebrow: 'Our promise', data: { points: [
+  { key: 'why', title: 'Why NutriDry Naturals', eyebrow: 'Our promise', data: { points: [
     { title: 'Carefully selected', text: 'We choose produce batch by batch and dry it slowly to keep colour and flavour.' },
     { title: 'Packed to keep fresh', text: 'Resealable pouches that protect against moisture and light.' },
     { title: 'Clear labelling', text: 'Batch, pack and best-before dates on every pack.' },
