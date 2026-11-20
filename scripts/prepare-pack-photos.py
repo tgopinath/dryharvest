@@ -33,9 +33,15 @@ def erase(im, x0, x1, y0, y1):
     out.paste(patch,(bx0,by0))
     return out, box
 
+SIZE=1200; FILL=0.90  # every pouch is scaled to the same height: 90% of a 1200px square
+
 def square(im, slug, pad=None):
-    w,h=im.size; s=int(max(w,h)*(pad or 1)); c=Image.new('RGB',(s,s),(255,255,255)); c.paste(im,((s-w)//2,(s-h)//2))
-    c.resize((1200,1200),Image.LANCZOS).save(OUT+slug+'.webp','WEBP',quality=88)
+    # trim to the pouch itself, then scale every pouch to the same height so they line up in grids
+    im=im.crop(ImageOps.invert(im.convert('L').point(lambda v:255 if v>240 else 0)).getbbox())
+    w,h=im.size; k=min(SIZE*FILL/h, SIZE*FILL/w)
+    im=im.resize((round(w*k),round(h*k)),Image.LANCZOS)
+    c=Image.new('RGB',(SIZE,SIZE),(255,255,255)); c.paste(im,((SIZE-im.width)//2,(SIZE-im.height)//2))
+    c.save(OUT+slug+'.webp','WEBP',quality=88)
 
 def single(n, slug):
     im=Image.open(f'{D}{n}.webp').convert('RGB'); w,h=im.size
@@ -51,6 +57,4 @@ if __name__=='__main__':
     for (a,b),slug in zip([(0,518),(518,1026),(1026,1536)],['dried-oyster-mushrooms','dried-button-mushroom-slices','dried-milky-mushrooms']):
         part=im.crop((a,0,b,1024)); w,h=part.size
         part,box=erase(part,int(w*.32),int(w*.70),int(h*.855),int(h*.895)); print(slug,box)
-        p=part.crop(ImageOps.invert(part.convert('L').point(lambda v:255 if v>242 else 0)).getbbox())
-        pw,ph=p.size; s=int(ph*1.06); c=Image.new('RGB',(s,s),(255,255,255)); c.paste(p,((s-pw)//2,(s-ph)//2))
-        c.resize((1200,1200),Image.LANCZOS).save(OUT+slug+'.webp','WEBP',quality=88)
+        square(part,slug)
