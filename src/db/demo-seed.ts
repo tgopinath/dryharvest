@@ -6,6 +6,7 @@ import { drizzle } from 'drizzle-orm/pglite';
 import * as schema from './schema';
 import { CATEGORIES, COMBOS, HOME_SECTIONS } from '../../scripts/seed-data';
 import { DETAILS } from '../../scripts/product-details';
+import { PRODUCT_IMAGES } from '../../scripts/product-images';
 
 const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 const skuOf = (name: string, label: string) =>
@@ -48,6 +49,10 @@ export async function initDemoDb(raw: PGlite) {
         benefits: det?.benefits ?? [], usage: det?.usage ?? null, avoid: det?.avoid ?? [],
         storage: c.kind === 'DECOR' ? 'Keep in a dry place away from direct sunlight and moisture.' : 'Store in a cool, dry place. Reseal the pouch after opening.',
       }).returning();
+
+      if (PRODUCT_IMAGES.includes(pslug)) {
+        await db.insert(schema.productImages).values({ productId: prod.id, url: `/products/${pslug}.webp`, alt: `${p.name} pack` });
+      }
 
       let i = 0;
       for (const [label, price, mrp] of p.sizes) {
