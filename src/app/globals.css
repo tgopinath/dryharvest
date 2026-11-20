@@ -5,8 +5,8 @@
 @layer base {
   :root { color-scheme: light; }
   html { -webkit-text-size-adjust: 100%; }
-  body { @apply bg-brand-cream text-brand-ink font-sans antialiased; font-feature-settings: 'ss01'; }
-  h1, h2, h3, .font-display { font-family: 'Fraunces Variable', Georgia, serif; font-optical-sizing: auto; letter-spacing: -0.015em; }
+  body { @apply bg-white text-brand-ink font-sans antialiased; }
+  h1, h2, h3, .font-display { font-family: 'Lato', system-ui, sans-serif; letter-spacing: -0.01em; }
   :focus-visible { outline: 2px solid #176B36; outline-offset: 2px; border-radius: 6px; }
   ::selection { background: #F5BC32; color: #17271C; }
   input[type='number']::-webkit-inner-spin-button { opacity: 1; }

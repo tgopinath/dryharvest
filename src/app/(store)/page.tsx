@@ -52,7 +52,7 @@ function SectionHead({ s, href, linkText = 'View all' }: { s: Pick<Section, 'tit
     <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
       <div className="max-w-2xl">
         {s.eyebrow && <p className="mb-1 text-sm font-semibold text-[#B07D00]">{s.eyebrow}</p>}
-        <h2 className="text-3xl font-medium sm:text-4xl">{s.title}</h2>
+        <h2 className="text-3xl font-bold sm:text-4xl">{s.title}</h2>
         {s.subtitle && <p className="mt-2 text-brand-ink/65">{s.subtitle}</p>}
       </div>
       {href && <Link href={href} className="shrink-0 text-sm font-semibold text-brand underline-offset-4 hover:underline">{linkText}</Link>}
@@ -66,11 +66,11 @@ function Hero({ s, claims }: { s: Section; claims: HeroClaim[] }) {
   const d = (s.data ?? {}) as { primaryCta?: { label: string; href: string }; secondaryCta?: { label: string; href: string }; imageUrl?: string };
   const pos = ['left-2 top-4 sm:-left-4', 'right-2 bottom-24 sm:-right-2', 'left-6 bottom-2'];
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-white to-brand-cream">
+    <section className="relative overflow-hidden bg-white">
       <div className="container-x grid items-center gap-10 py-12 lg:grid-cols-[1fr_1.1fr] lg:py-20">
         <div className="max-w-xl">
           {s.eyebrow && <p className="inline-flex rounded-full bg-brand-pale px-3.5 py-1.5 text-sm font-semibold text-brand-deep">{s.eyebrow}</p>}
-          <h1 className="mt-5 text-[2.6rem] font-medium leading-[1.04] text-brand-deep sm:text-6xl lg:text-[4.1rem]">{s.title}</h1>
+          <h1 className="mt-5 text-[2.6rem] font-bold leading-[1.04] text-brand-deep sm:text-6xl lg:text-[4.1rem]">{s.title}</h1>
           {s.subtitle && <p className="mt-5 max-w-lg text-lg leading-relaxed text-brand-ink/70">{s.subtitle}</p>}
           <div className="mt-8 flex flex-wrap gap-3">
             {d.primaryCta && <Link href={d.primaryCta.href} className={buttonClass('primary', 'lg')}>{d.primaryCta.label}</Link>}
@@ -183,7 +183,7 @@ function Why({ s }: { s: Section }) {
       <div className="grid gap-10 rounded-[2rem] bg-brand-deep p-8 text-white sm:p-12 lg:grid-cols-[1fr_1.4fr]">
         <div>
           {s.eyebrow && <p className="text-sm font-semibold text-brand-yellow">{s.eyebrow}</p>}
-          <h2 className="mt-1 text-4xl font-medium">{s.title}</h2>
+          <h2 className="mt-1 text-4xl font-bold">{s.title}</h2>
           {s.subtitle && <p className="mt-3 text-white/70">{s.subtitle}</p>}
           <Link href="/about" className={buttonClass('yellow', 'md', 'mt-6')}>Our story</Link>
         </div>
@@ -233,7 +233,7 @@ function Newsletter({ s }: { s: Section }) {
       <div className="flex flex-col items-start gap-6 rounded-[2rem] bg-brand-pale p-8 sm:p-12 lg:flex-row lg:items-center lg:justify-between">
         <div className="max-w-lg">
           {s.eyebrow && <p className="text-sm font-semibold text-brand">{s.eyebrow}</p>}
-          <h2 className="mt-1 text-3xl font-medium text-brand-deep sm:text-4xl">{s.title}</h2>
+          <h2 className="mt-1 text-3xl font-bold text-brand-deep sm:text-4xl">{s.title}</h2>
           {s.subtitle && <p className="mt-2 text-brand-ink/65">{s.subtitle}</p>}
         </div>
         <NewsletterForm />

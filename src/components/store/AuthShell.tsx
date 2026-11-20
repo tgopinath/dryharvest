@@ -12,7 +12,7 @@ export function AuthShell({ title, text, next, error, children }: { title: strin
   return (
     <div className="container-x flex justify-center py-14">
       <div className="w-full max-w-md rounded-3xl border border-brand-ink/10 bg-white p-6 sm:p-10">
-        <h1 className="text-3xl font-medium text-brand-deep">{title}</h1>
+        <h1 className="text-3xl font-bold text-brand-deep">{title}</h1>
         <p className="mt-1 text-sm text-brand-ink/60">{text}</p>
         {error && GOOGLE_ERR[error] && <Alert tone="error" className="mt-4">{GOOGLE_ERR[error]}</Alert>}
         {google && (

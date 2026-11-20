@@ -39,7 +39,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   ];
   const items = all.filter((i) => can(user.role, i.perm)).map(({ perm: _p, ...i }) => i);
   return (
-    <div className="min-h-screen bg-[#F4F5F1] lg:grid lg:grid-cols-[248px_1fr]">
+    <div className="min-h-screen bg-white lg:grid lg:grid-cols-[248px_1fr]">
       <aside className="bg-brand-deep lg:sticky lg:top-0 lg:flex lg:h-screen lg:flex-col lg:overflow-y-auto lg:p-4">
         <Link href="/admin" className="mb-6 hidden items-center gap-2 px-2 pt-1 lg:flex"><LeafMark className="size-8" /><span className="font-display text-xl text-white">DryHarvest</span><span className="rounded bg-white/10 px-1.5 text-[10px] font-semibold text-white/70">Admin</span></Link>
         <AdminNav items={items} />

@@ -56,7 +56,7 @@ export function PageHeader({ title, text, crumbs }: { title: string; text?: stri
           </ol>
         </nav>
       )}
-      <h1 className="text-4xl font-medium text-brand-deep sm:text-5xl">{title}</h1>
+      <h1 className="text-4xl font-bold text-brand-deep sm:text-5xl">{title}</h1>
       {text && <p className="mt-3 max-w-2xl text-brand-ink/65">{text}</p>}
     </div>
   );

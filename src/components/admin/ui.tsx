@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils';
 export function AdminHeader({ title, text, actions }: { title: string; text?: string; actions?: React.ReactNode }) {
   return (
     <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
-      <div><h1 className="text-3xl font-medium text-brand-deep">{title}</h1>{text && <p className="mt-1 text-sm text-brand-ink/60">{text}</p>}</div>
+      <div><h1 className="text-3xl font-bold text-brand-deep">{title}</h1>{text && <p className="mt-1 text-sm text-brand-ink/60">{text}</p>}</div>
       {actions && <div className="flex flex-wrap gap-2">{actions}</div>}
     </div>
   );

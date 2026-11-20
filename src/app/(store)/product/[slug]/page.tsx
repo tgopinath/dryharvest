@@ -98,7 +98,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             <KindMark kind={p.kind} veg={p.vegMark} />
             {p.isDemo && <span className="rounded-full bg-brand-ink/5 px-2 py-0.5 text-[11px] font-semibold text-brand-ink/60">Demo product</span>}
           </div>
-          <h1 className="mt-2 text-4xl font-medium leading-tight text-brand-deep sm:text-5xl">{p.name}</h1>
+          <h1 className="mt-2 text-4xl font-bold leading-tight text-brand-deep sm:text-5xl">{p.name}</h1>
           {reviews.count > 0 && <a href="#reviews"><Stars value={reviews.avg!} count={reviews.count} className="mt-3" /></a>}
           {p.shortDescription && <p className="mt-4 text-lg text-brand-ink/70">{p.shortDescription}</p>}
           {p.safetyNote && <Alert tone="warn" className="mt-4">{p.safetyNote}</Alert>}

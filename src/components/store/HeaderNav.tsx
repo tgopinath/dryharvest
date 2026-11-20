@@ -65,7 +65,7 @@ export function MobileNav({ categories, isStaff, loggedIn }: { categories: Cat[]
       {open && (
         <div className="fixed inset-0 z-[60] lg:hidden" role="dialog" aria-modal="true" aria-label="Menu">
           <div className="absolute inset-0 bg-brand-ink/40" onClick={() => setOpen(false)} />
-          <div className="absolute inset-y-0 right-0 flex w-[min(88vw,360px)] flex-col overflow-y-auto bg-brand-cream p-5">
+          <div className="absolute inset-y-0 right-0 flex w-[min(88vw,360px)] flex-col overflow-y-auto bg-white p-5">
             <div className="mb-4 flex items-center justify-between"><span className="font-display text-xl">Menu</span><button aria-label="Close menu" onClick={() => setOpen(false)} className="flex size-10 items-center justify-center rounded-full hover:bg-brand-ink/5"><X className="size-5" /></button></div>
             <nav aria-label="Mobile" className="space-y-1">
               {[...links, { href: '/categories', label: 'All categories' }, { href: '/about', label: 'About' }, { href: '/contact', label: 'Contact' }].map((l) => (
