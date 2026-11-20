@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { and, eq } from 'drizzle-orm';
-import { Truck, RotateCcw, ShieldCheck } from 'lucide-react';
+import { Truck, RotateCcw, ShieldCheck, CircleCheck, CircleAlert } from 'lucide-react';
 import { db, schema } from '@/db';
 import { getProductBySlug, getProductReviews, getVariantBatchInfo, queryProducts, hydrateCards } from '@/server/catalog';
 import { getCurrentUser } from '@/server/auth';
@@ -50,7 +50,6 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     ['Ingredients', p.ingredients],
     ['Allergen information', p.allergens],
     ['Storage', p.storage],
-    ['How to use', p.usage],
     ['Shelf life', p.shelfLife],
   ];
   const label: [string, React.ReactNode][] = ([
@@ -101,6 +100,11 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           <h1 className="mt-2 text-4xl font-bold leading-tight text-brand-deep sm:text-5xl">{p.name}</h1>
           {reviews.count > 0 && <a href="#reviews"><Stars value={reviews.avg!} count={reviews.count} className="mt-3" /></a>}
           {p.shortDescription && <p className="mt-4 text-lg text-brand-ink/70">{p.shortDescription}</p>}
+          {p.benefits.length > 0 && (
+            <ul aria-label="Benefits" className="mt-5 space-y-2">
+              {p.benefits.map((b) => <li key={b} className="flex gap-2.5 text-[15px]"><CircleCheck className="mt-0.5 size-5 shrink-0 text-brand" aria-hidden />{b}</li>)}
+            </ul>
+          )}
           {p.safetyNote && <Alert tone="warn" className="mt-4">{p.safetyNote}</Alert>}
           <div className="mt-6 border-t border-brand-ink/10 pt-6">
             <BuyBox productName={p.name} variants={p.variants.map((v) => ({ id: v.id, label: v.label, price: v.price, mrp: v.mrp, stock: v.stock }))}>
@@ -120,6 +124,20 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         <section aria-labelledby="about-h">
           <h2 id="about-h" className="text-3xl">About this product</h2>
           {p.description && <div className="prose-dh mt-4 text-brand-ink/80">{p.description}</div>}
+          {p.usage && (
+            <div className="mt-8">
+              <h3 className="text-xl">How to use</h3>
+              <p className="mt-2 text-brand-ink/80">{p.usage}</p>
+            </div>
+          )}
+          {p.avoid.length > 0 && (
+            <div className="mt-8 rounded-2xl border border-[#F5BC32]/60 bg-[#FFFBEF] p-5">
+              <h3 className="flex items-center gap-2 text-xl"><CircleAlert className="size-5 text-[#8a5a00]" aria-hidden />Who should avoid it</h3>
+              <ul className="mt-3 list-disc space-y-1.5 pl-5 text-sm text-brand-ink/80">
+                {p.avoid.map((a) => <li key={a}>{a}</li>)}
+              </ul>
+            </div>
+          )}
           <dl className="mt-8 divide-y divide-brand-ink/10 rounded-2xl border border-brand-ink/10 bg-white">
             {info.filter(([, v]) => v).map(([k, v]) => (
               <div key={k} className="grid gap-1 p-4 sm:grid-cols-[180px_1fr]"><dt className="text-sm font-bold">{k}</dt><dd className="text-sm text-brand-ink/75 whitespace-pre-line">{v}</dd></div>

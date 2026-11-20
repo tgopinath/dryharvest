@@ -5,6 +5,7 @@ import type { PGlite } from '@electric-sql/pglite';
 import { drizzle } from 'drizzle-orm/pglite';
 import * as schema from './schema';
 import { CATEGORIES, COMBOS, HOME_SECTIONS } from '../../scripts/seed-data';
+import { DETAILS } from '../../scripts/product-details';
 
 const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 const skuOf = (name: string, label: string) =>
@@ -36,6 +37,7 @@ export async function initDemoDb(raw: PGlite) {
 
     for (const p of c.products) {
       const pslug = slug(p.name);
+      const det = DETAILS[p.name];
       const safety = 'safetyNote' in c ? (c as { safetyNote?: string }).safetyNote ?? null : null;
       const [prod] = await db.insert(schema.products).values({
         slug: pslug, name: p.name, shortDescription: p.short,
@@ -43,6 +45,7 @@ export async function initDemoDb(raw: PGlite) {
         categoryId: cat.id, kind: c.kind, status: 'PUBLISHED', tags: p.tags ?? [], collections: p.collections ?? [],
         isFeatured: !!p.featured, safetyNote: safety, vegMark: c.kind === 'FOOD' ? true : null,
         supplierId: c.slug === 'spices-and-powders' ? supB.id : supA.id, isDemo: true,
+        benefits: det?.benefits ?? [], usage: det?.usage ?? null, avoid: det?.avoid ?? [],
         storage: c.kind === 'DECOR' ? 'Keep in a dry place away from direct sunlight and moisture.' : 'Store in a cool, dry place. Reseal the pouch after opening.',
       }).returning();
 

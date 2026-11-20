@@ -122,6 +122,9 @@ export const products = pgTable('products', {
   nutritionBasis: text('nutrition_basis'),
   storage: text('storage'),
   usage: text('usage'),
+  // Practical benefits (taste, use, convenience) and who should avoid the product.
+  benefits: text('benefits').array().notNull().default(sql`'{}'::text[]`),
+  avoid: text('avoid').array().notNull().default(sql`'{}'::text[]`),
   shelfLife: text('shelf_life'),
   countryOfOrigin: text('country_of_origin').default('India'),
   manufacturer: text('manufacturer'),
