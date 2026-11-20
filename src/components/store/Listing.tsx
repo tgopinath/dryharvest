@@ -4,11 +4,12 @@ import { queryProducts, getAvailableSizes, SORTS, hydrateCards, type SortKey } f
 import { getCurrentUser } from '@/server/auth';
 import { ProductGrid } from './ProductCard';
 import { Filters } from './Filters';
-import { Pagination } from './Pagination';
 import { EmptyState, buttonClass } from '@/components/ui';
 import { rupeesToPaise } from '@/lib/utils';
 
 export type SP = Record<string, string | string[] | undefined>;
+// Listings show every matching product in one continuous grid (no pagination).
+const ALL = 500;
 const one = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v) ?? null;
 
 export async function Listing({ sp, basePath, category, q, categories }: { sp: SP; basePath: string; category?: string; q?: string; categories?: { slug: string; name: string }[] }) {
@@ -18,7 +19,7 @@ export async function Listing({ sp, basePath, category, q, categories }: { sp: S
     queryProducts({
       category: category ?? one(sp.category), q: q ?? one(sp.q), collection: one(sp.collection), kind: one(sp.kind),
       min: rupeesToPaise(one(sp.min)), max: rupeesToPaise(one(sp.max)), sizes, inStock: !!one(sp.stock),
-      sort: sort in SORTS ? sort : 'featured', page: Number(one(sp.page)) || 1, perPage: 12,
+      sort: sort in SORTS ? sort : 'featured', page: 1, perPage: ALL,
     }),
     getAvailableSizes(category),
     getCurrentUser(),
@@ -30,10 +31,7 @@ export async function Listing({ sp, basePath, category, q, categories }: { sp: S
       <div>
         <Suspense><Filters mode="toolbar" sizes={allSizes} categories={categories} sorts={SORTS} total={res.total} /></Suspense>
         {items.length ? (
-          <>
-            <ProductGrid items={items} cols={3} />
-            <Pagination page={res.page} pages={res.pages} basePath={basePath} params={sp} />
-          </>
+          <ProductGrid items={items} cols={3} />
         ) : (
           <EmptyState
             title={q ? `Nothing matches “${q}”` : 'No products match these filters'}

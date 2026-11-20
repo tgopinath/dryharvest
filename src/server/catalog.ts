@@ -32,7 +32,7 @@ const avgRating = sql<number | null>`(select avg(r.rating)::float from reviews r
 const reviewCount = sql<number>`(select count(*)::int from reviews r where r.product_id = ${schema.products.id} and r.status = 'APPROVED')`;
 
 export async function queryProducts(q: ProductQuery) {
-  const perPage = Math.min(Math.max(q.perPage ?? 12, 1), 48);
+  const perPage = Math.min(Math.max(q.perPage ?? 12, 1), 500);
   const page = Math.max(q.page ?? 1, 1);
   const where: SQL[] = [eq(schema.products.status, 'PUBLISHED'), eq(schema.categories.isActive, true)];
   if (q.category) where.push(eq(schema.categories.slug, q.category));
