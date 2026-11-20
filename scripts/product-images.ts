@@ -1,2 +1,20 @@
 // Product photos in public/products/<slug>.webp. Add a slug here once its photo is in that folder.
-export const PRODUCT_IMAGES: string[] = ['dried-mango-slices'];
+export const PRODUCT_IMAGES: string[] = [
+  'banana-chips',
+  'dried-amla-candy-free-pieces',
+  'dried-apple-rings',
+  'dried-beetroot-chips',
+  'dried-carrot-cubes',
+  'dried-chikoo-slices',
+  'dried-dragon-fruit',
+  'dried-garlic-flakes',
+  'dried-guava-slices',
+  'dried-jackfruit-chips',
+  'dried-mango-slices',
+  'dried-okra-slices',
+  'dried-onion-flakes',
+  'dried-papaya-cubes',
+  'dried-pineapple-rings',
+  'dried-spinach-leaves',
+  'sun-dried-tomatoes',
+];
